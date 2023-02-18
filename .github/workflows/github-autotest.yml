@@ -15,3 +15,5 @@ jobs:
       - name: run test
         id: tester
         run: cd ucore-tutorial-ci && make test passwd=${{ secrets.BASE_TEST_TOKEN }} CHAPTER=`echo ${GITHUB_REF##*/} | grep -oP 'ch\K[0-9]'` | grep "Test passed" | xargs -i echo "PASSED={}" >> $GITHUB_OUTPUT
+      - name: test read
+        run: echo "The selected color is ${{ steps.tester.outputs.PASSED }}"
