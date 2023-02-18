@@ -29,7 +29,6 @@ jobs:
           ref: 'gh-pages'
       - name: Save Log File
         run: |
-          echo ${GITHUB_REF##*/}
           mkdir autograding_logs
           cd autograding_logs
           if [  -f "../latest.json"  ]; then
@@ -39,7 +38,7 @@ jobs:
           fi
           FILE_NAME=`date +%Y_%m_%d_%H_%M_%S`.txt
           echo -ne "Points: ${{ needs.build.outputs.points }}" >> $FILE_NAME
-          cat older.json | jq ".${GITHUB_REF} |= \"$FILE_NAME\"" > latest.json
+          cat older.json | jq ".${GITHUB_REF##*/} |= \"$FILE_NAME\"" > latest.json
           rm older.json
           echo -ne "# Got Points\n" > README.md
           echo "![Points bar](../../blob/gh-pages/points-badge.svg)" >> README.md
