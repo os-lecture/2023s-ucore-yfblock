@@ -37,7 +37,7 @@ jobs:
               echo "{}" > older.json
           fi
           FILE_NAME=`date +%Y_%m_%d_%H_%M_%S`.txt
-          echo -ne "Points: ${{ needs.build.outputs.points }}" >> $FILE_NAME
+          echo -ne "Points: ${{ needs.base-test.outputs.points }}" >> $FILE_NAME
           cat older.json | jq ".${GITHUB_REF##*/} |= \"$FILE_NAME\"" > latest.json
           rm older.json
           echo -ne "# Got Points\n" > README.md
@@ -45,7 +45,7 @@ jobs:
       - name: Make points svg
         uses: markpatterson27/points-bar@v1
         with:
-          points: '${{ needs.build.outputs.points }}'
+          points: '${{ needs.base-test.outputs.points }}'
           path: 'autograding_logs/points-badge.svg'
           type: 'badge'
       - name: GitHub Pages
