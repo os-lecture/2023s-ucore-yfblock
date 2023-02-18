@@ -23,10 +23,10 @@ jobs:
     needs: base-test
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-        continue-on-error: true
-        with:
-          ref: 'gh-pages'
+      # - uses: actions/checkout@v3
+      #   continue-on-error: true
+      #   with:
+      #     ref: 'gh-pages'
       - name: Save Log File
         run: |
           mkdir autograding_logs
